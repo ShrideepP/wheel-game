@@ -6,15 +6,16 @@ import {useNavigate} from 'react-router-dom';
 import {GoPlus} from 'react-icons/go';
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer, toast} from 'react-toastify';
+import {UserContext} from '../context/UserContext';
  
 const Form = () => {
 
     const [loading, setLoading] = useState(false);
     const [checkbox, setCheckbox] = useState(false);
     const [luckyBtn, setLuckyBtn] = useState(true);
-    const [userData, setUserData] = useState({email: '', phone: ''});
     
     const navigate = useNavigate();
+    const {userInfo, handleEmailChange, handlePhoneChange} = UserContext();
 
     const emailRef = useRef(null);
     const phoneRef = useRef(null);
@@ -25,19 +26,15 @@ const Form = () => {
     const handleLuckyBtn = () => setLuckyBtn(false);
     const handleCheckbox = () => setCheckbox(!checkbox);
 
-    const handleEmailChange = e => setUserData({...userData, email: e.target.value});
-    const handlePhoneChange = e => setUserData({...userData, phone: e.target.value});
-
     const handleSubmit = e => {
         e.preventDefault();
         if(checkbox) {
             setLoading(true);
             setTimeout(() => {
-                setUserData({email: '', phone: ''});
                 setLoading(false);
                 setCheckbox(false);
                 setLuckyBtn(true);
-                navigate('/');
+                navigate('/play');
             }, 2000);
         } else {
             toast.error('Please agree to receive recurring automated messages');
@@ -60,14 +57,14 @@ const Form = () => {
                     <MdMailOutline className='text-3xl' />
                     <div className='flex flex-col gap-y-[2px]'>
                         <label htmlFor="email" className='text-sm font-semibold'>Email</label>
-                        <input onChange={handleEmailChange} value={userData.email} ref={emailRef} required type="email" placeholder='joe@gmail.com' className='w-full text-base font-medium outline-none rounded-none' />
+                        <input onChange={handleEmailChange} value={userInfo.email} ref={emailRef} required type="email" placeholder='joe@gmail.com' className='w-full text-base font-medium outline-none rounded-none' />
                     </div>
                 </div>
                 <div onClick={handlePhoneClick} className='py-2 px-3 flex items-center gap-x-4 bg-white border-b-2 border-accent rounded-t'>
                     <MdOutlinePhone className='text-3xl' />
                     <div className='flex flex-col gap-y-[2px]'>
                         <label htmlFor="email" className='text-sm font-semibold'>Phone</label>
-                        <input onChange={handlePhoneChange} value={userData.phone} ref={phoneRef} required type="tel" placeholder='+91 98256 XXXXX' className='w-full text-base font-medium outline-none rounded-none' />
+                        <input onChange={handlePhoneChange} value={userInfo.phone} ref={phoneRef} required type="tel" placeholder='+91 98256 XXXXX' className='w-full text-base font-medium outline-none rounded-none' />
                     </div>
                 </div>
                 <div className='py-2 px-3 flex items-center gap-x-4 border-2 border-black rounded-md'>
