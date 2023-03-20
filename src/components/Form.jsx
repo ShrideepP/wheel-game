@@ -1,12 +1,12 @@
-import React, {useState, useRef} from 'react';
-import {ImSpinner2} from 'react-icons/im';
-import {GiCheckMark} from 'react-icons/gi';
-import {MdMailOutline, MdOutlinePhone} from 'react-icons/md';
-import {useNavigate} from 'react-router-dom';
-import {GoPlus} from 'react-icons/go';
+import React, { useState, useRef } from 'react';
+import { ImSpinner2 } from 'react-icons/im';
+import { GiCheckMark } from 'react-icons/gi';
+import { MdMailOutline, MdOutlinePhone } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { GoPlus } from 'react-icons/go';
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastContainer, toast} from 'react-toastify';
-import {UserContext} from '../context/UserContext';
+import { ToastContainer, toast } from 'react-toastify';
+import { UserContext } from '../context/UserContext';
  
 const Form = () => {
 
@@ -46,7 +46,7 @@ const Form = () => {
             <ToastContainer 
                 theme='light'
                 position='bottom-center'
-                autoClose={5000}
+                autoClose={2500}
                 closeOnClick 
             />
             <h1 className='text-3xl md:text-4xl font-extrabold leading-snug md:leading-snug'>
@@ -79,7 +79,7 @@ const Form = () => {
                     {loading ? <ImSpinner2 className='text-2xl text-white animate-spin' /> : <span className='text-lg text-white font-semibold tracking-tight'>Try Your Luck</span>}
                 </button>
             </form>
-            <p className='text-sm text-center font-normal'>
+            <p className='text-sm text-accent text-center font-normal'>
                 *You can spin the wheel only once!
                 <br />
                 *If you win, you can claim your coupon for 10 minutes only!
