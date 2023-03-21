@@ -14,6 +14,7 @@ export const UserProvider = ({children}) => {
         <Context.Provider
             value={{
                 userInfo,
+                setUserInfo,
                 handleEmailChange,
                 handlePhoneChange,
             }}

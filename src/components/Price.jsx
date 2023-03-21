@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { WheelContext } from '../context/WheelContext';
+import { UserContext } from '../context/UserContext';
 
 const Price = () => {
 
+    const navigate = useNavigate();
+
+    const { priceWon, setPriceWon } = WheelContext();
+    const { setUserInfo } = UserContext();
+
     const [copiedText] = useState('XAXPDF20');
+    const [copy, setCopy] = useState(false);
 
     const handleCopy = () => {
         toast.success('Copied Successfully');
+        setCopy(true);
         navigator.clipboard.writeText(copiedText);
+    };
+    
+    const handleBack = () => {
+        navigator.clipboard.writeText(copiedText);
+        setUserInfo({email: '', phone: ''});
+        setPriceWon('');
+        navigate('/');
     };
 
     return (
@@ -20,14 +37,14 @@ const Price = () => {
                 closeOnClick 
             />
             <h6 className='text-xl text-black font-bold'>Congrats You Won:</h6>
-            <h2 className='text-3xl font-bold leading-snug'>20% Off Coupon on Best Sellers</h2>
+            <h2 className='text-3xl font-bold leading-snug capitalize'>{priceWon}</h2>
             <div className="w-full h-14 flex items-center bg-[#14141433] overflow-hidden rounded">
                 <input type="text" readOnly value={copiedText} className='w-full px-6 text-xl text-white font-bold bg-transparent outline-none' />
-                <button onClick={handleCopy} className='w-fit h-full px-6 text-white text-base font-semibold grid place-items-center bg-green-800 hover:bg-green-700'>
-                    COPY
+                <button onClick={handleCopy} disabled={copy} className='w-fit h-full px-6 grid place-items-center bg-green-800 hover:bg-green-700'>
+                    <span className='text-white text-base font-semibold uppercase'>{copy ? 'coppied' : 'copy'}</span>
                 </button>
             </div>
-            <button className="w-full h-14 grid place-items-center bg-green-800 hover:bg-green-700 rounded-full">
+            <button onClick={handleBack} className="w-full h-14 grid place-items-center bg-green-800 hover:bg-green-700 rounded-full">
                 <span className='text-lg text-white font-semibold tracking-tight'>Close Panel & Copy</span>
             </button>
             <p className='text-sm text-accent text-center font-normal'>
