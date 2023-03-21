@@ -37,7 +37,7 @@ const Price = () => {
                 closeOnClick 
             />
             <h6 className='text-xl text-black font-bold'>Congrats You Won:</h6>
-            <h2 className='text-3xl font-bold leading-snug capitalize'>{priceWon}</h2>
+            <h2 className='text-3xl font-bold leading-snug capitalize'>{priceWon ? priceWon : '30% sitewide off'}</h2>
             <div className="w-full h-14 flex items-center bg-[#14141433] overflow-hidden rounded">
                 <input type="text" readOnly value={copiedText} className='w-full px-6 text-xl text-white font-bold bg-transparent outline-none' />
                 <button onClick={handleCopy} disabled={copy} className='w-fit h-full px-6 grid place-items-center bg-green-800 hover:bg-green-700'>
